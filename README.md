@@ -3,6 +3,7 @@
 ### Software
 
 ### Reproduction
+1. Download raster data from [Google Drive](https://drive.google.com/uc?id=1lzglfQJqlQh9OWT_-czc5L0hQ1AhoR8M&export=download) or [Earth Explorer](https://earthexplorer.usgs.gov/) (original source, registration required) and then unzip to `data/`. 
 
 ### Dataset
 Landsat 8 satellite scene (10 bands with a resolution of 30 m) was used for tests.
