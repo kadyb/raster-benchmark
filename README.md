@@ -1,6 +1,11 @@
 # Raster benchmarks
 
 ### Software
+**R**:
+- [stars](https://github.com/r-spatial/stars)
+- [terra](https://github.com/rspatial/terra)
+- [raster](https://github.com/rspatial/raster)
+- [exactextractr](https://github.com/isciences/exactextractr)
 
 ### Reproduction
 1. Download raster data (851 MB) from [Google Drive](https://drive.google.com/uc?id=1lzglfQJqlQh9OWT_-czc5L0hQ1AhoR8M&export=download) or [Earth Explorer](https://earthexplorer.usgs.gov/) (original source, registration required) and then unzip to `data/`. 
