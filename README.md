@@ -1,6 +1,10 @@
 # Raster benchmarks
 
 ### Software
+**Python**:
+- [rasterio](https://github.com/mapbox/rasterio)
+- [rasterstats](https://github.com/perrygeo/python-rasterstats)
+
 **R**:
 - [stars](https://github.com/r-spatial/stars)
 - [terra](https://github.com/rspatial/terra)
