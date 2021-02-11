@@ -1,0 +1,161 @@
+---
+title: "Raster Benchmark"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r message=FALSE}
+library(ggplot2)
+```
+
+```{r collapse=TRUE}
+cat(paste("R", getRversion(), "\n"))
+cat(paste("sf", packageVersion("sf"), "\n"))
+cat(paste("stars", packageVersion("stars"), "\n"))
+cat(paste("terra", packageVersion("terra"), "\n"))
+cat(paste("raster", packageVersion("raster"), "\n"))
+cat(paste("exactextractr", packageVersion("exactextractr"), "\n"))
+```
+
+```{r collapse=TRUE}
+# check it manually
+cat("Python 3.8.5", "\n")
+cat("rasterio 1.1.8", "\n")
+cat("rasterstats 0.14.0")
+```
+
+```{r}
+files = list.files("results", full.names = TRUE)
+df = lapply(files, read.csv2)
+df = do.call(rbind, lapply(files, read.csv2,
+                           colClasses = c("factor", "factor", "numeric")))
+```
+
+## Extract values by points
+#### 68 275 points
+
+```{r extract-points}
+df_agg = df[df$task == "extract-points", ]
+df_agg = merge(aggregate(time ~ package, df_agg, median),
+               aggregate(time ~ package, df_agg, sd), by = "package")
+colnames(df_agg)[2:3] = c("median", "sd")
+
+ggplot(df_agg, aes(x = reorder(package, -median), y = median)) + 
+  geom_col(width = 0.3) +
+  geom_errorbar(aes(ymin = median, ymax = median + sd),
+                color = "red", width = 0.3) +
+  labs(caption = "rasterstats hasn't been tested because is slow (1 hour)") +
+  ylab("Time [s]") +
+  xlab("Package") +
+  coord_flip() +
+  theme_light()
+```
+
+## Downsample
+#### 30 to 90 m
+
+```{r downsample}
+df_agg = df[df$task == "downsample", ]
+df_agg = merge(aggregate(time ~ package, df_agg, median),
+               aggregate(time ~ package, df_agg, sd), by = "package")
+colnames(df_agg)[2:3] = c("median", "sd")
+
+ggplot(df_agg, aes(x = reorder(package, -median), y = median)) + 
+  geom_col(width = 0.3) +
+  geom_errorbar(aes(ymin = median, ymax = median + sd),
+                color = "red", width = 0.3) +
+  ylab("Time [s]") +
+  xlab("Package") +
+  coord_flip() +
+  theme_light()
+```
+
+## Calculate NDVI
+
+```{r ndvi}
+df_agg = df[df$task == "ndvi", ]
+df_agg = merge(aggregate(time ~ package, df_agg, median),
+               aggregate(time ~ package, df_agg, sd), by = "package")
+colnames(df_agg)[2:3] = c("median", "sd")
+
+# results from stars are not comparable with other packages
+df_agg = df_agg[df_agg$median != 0, ]
+
+ggplot(df_agg, aes(x = reorder(package, -median), y = median)) + 
+  geom_col(width = 0.3) +
+  geom_errorbar(aes(ymin = median, ymax = median + sd),
+                color = "red", width = 0.3) +
+  labs(caption = "stars had memory allocation error") +
+  ylab("Time [s]") +
+  xlab("Package") +
+  coord_flip() +
+  theme_light()
+```
+
+## Write multilayer
+#### 10 layers with masks, LZW compression
+
+```{r write}
+df_agg = df[df$task == "write", ]
+df_agg = merge(aggregate(time ~ package, df_agg, median),
+               aggregate(time ~ package, df_agg, sd), by = "package")
+colnames(df_agg)[2:3] = c("median", "sd")
+
+ggplot(df_agg, aes(x = reorder(package, -median), y = median)) + 
+  geom_col(width = 0.3) +
+  geom_errorbar(aes(ymin = median, ymax = median + sd),
+                color = "red", width = 0.3) +
+  labs(caption = "stars default chunk size was lowered from (7771, 3217) to (7771, 1608)") +
+  ylab("Time [s]") +
+  xlab("Package") +
+  coord_flip() +
+  theme_light()
+```
+
+## Crop
+#### by rectangular extent
+
+```{r crop}
+df_agg = df[df$task == "crop", ]
+df_agg = merge(aggregate(time ~ package, df_agg, median),
+               aggregate(time ~ package, df_agg, sd), by = "package")
+colnames(df_agg)[2:3] = c("median", "sd")
+
+ggplot(df_agg, aes(x = reorder(package, -median), y = median)) + 
+  geom_col(width = 0.3) +
+  geom_errorbar(aes(ymin = median, ymax = median + sd),
+                color = "red", width = 0.3) +
+  ylab("Time [s]") +
+  xlab("Package") +
+  coord_flip() +
+  theme_light()
+```
+
+## Zonal statistics
+#### mean values for 1 940 buffers
+
+```{r zonal}
+df_agg = df[df$task == "zonal", ]
+df_agg = merge(aggregate(time ~ package, df_agg, median),
+               aggregate(time ~ package, df_agg, sd), by = "package")
+colnames(df_agg)[2:3] = c("median", "sd")
+
+ggplot(df_agg, aes(x = reorder(package, -median), y = median)) + 
+  geom_col(width = 0.3) +
+  geom_errorbar(aes(ymin = median, ymax = median + sd),
+                color = "red", width = 0.3) +
+  labs(caption = "raster hasn't been tested because is VERY slow (few hours)") +
+  ylab("Time [s]") +
+  xlab("Package") +
+  coord_flip() +
+  theme_light()
+```
+
