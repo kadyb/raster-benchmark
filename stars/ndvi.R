@@ -14,7 +14,7 @@ calc_ndvi = function(x) (x[7] - x[6]) / (x[7] + x[6])
 t_vec = numeric(10)
 for (i in seq_len(10)) {
 
-  t = system.time(st_as_stars(st_apply(ras, c("x", "y"), calc_ndvi)))
+  t = system.time(st_apply(ras, c("x", "y"), calc_ndvi))
   t = unname(t["elapsed"])
   t_vec[i] = t
 
