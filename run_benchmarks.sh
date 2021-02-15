@@ -10,6 +10,7 @@ for i in ${R_packages[*]}
 do
   for path in "${i}"/*
   do
+    echo "$path"
     Rscript "$path"
   done
 done
