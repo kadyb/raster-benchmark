@@ -167,6 +167,6 @@ colnames(timings)[3] = "median"
 timings = timings[timings$median != 0, ]
 
 timings$median = round(timings$median, 1)
-write.csv2(timings, "timings.csv", row.names = FALSE, quote = FALSE)
+write.csv(timings, "timings.csv", row.names = FALSE, quote = FALSE)
 ```
 
