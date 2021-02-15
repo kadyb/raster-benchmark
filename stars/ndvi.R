@@ -9,17 +9,33 @@ ras = st_redimension(ras)
 ras_names = c("B1", "B10", "B11", "B2", "B3", "B4", "B5", "B6", "B7", "B9")
 ras = st_set_dimensions(ras, 3, values = ras_names, names = "band")
 
-calc_ndvi = function(x) (x[7] - x[6]) / (x[7] + x[6])
+###############################################
+### calc NDVI using function
 
-t_vec = numeric(10)
+t_vec_1 = numeric(10)
 for (i in seq_len(10)) {
 
-  t = system.time(st_apply(ras, c("x", "y"), calc_ndvi))
+  t = system.time(adrop((ras[,,,7] - ras[,,,6]) / (ras[,,,7] + ras[,,,6])))
   t = unname(t["elapsed"])
-  t_vec[i] = t
+  t_vec_1[i] = t
 
 }
 
-output = data.frame(task = "ndvi", package = "stars", time = t_vec)
+###############################################
+### calc NDVI using st_apply
+
+calc_ndvi = function(red, nir) (nir - red) / (nir + red)
+
+t_vec_2 = numeric(10)
+for (i in seq_len(10)) {
+
+  t = system.time(st_apply(ras[,,,6:7], c("x", "y"), calc_ndvi))
+  t = unname(t["elapsed"])
+  t_vec_2[i] = t
+
+}
+
+output = rbind(data.frame(task = "ndvi", package = "stars-fun", time = t_vec_1),
+               data.frame(task = "ndvi", package = "stars-st_apply", time = t_vec_2))
 if (!dir.exists("results")) dir.create("results")
 write.csv2(output, "results/ndvi-stars.csv", row.names = FALSE)
