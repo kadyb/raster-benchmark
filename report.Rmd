@@ -159,3 +159,14 @@ ggplot(df_agg, aes(x = reorder(package, -median), y = median)) +
   theme_light()
 ```
 
+```{r}
+timings = aggregate(time ~ task + package, df, median)
+colnames(timings)[3] = "median"
+
+# results from stars are not comparable with other packages
+timings = timings[timings$time != 0, ]
+
+timings$median = round(timings$median, 1)
+write.csv2(timings, "timings.csv", row.names = FALSE)
+```
+
