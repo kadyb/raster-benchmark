@@ -16,10 +16,11 @@ do
 done
 
 # run Python benchmarks
-# for i in ${Python_packages[*]}
-# do
-#   for path in "${i}"/*
-#   do
-#     echo "$path"
-#   done
-# done
+for i in ${Python_packages[*]}
+do
+  for path in "${i}"/*
+  do
+    echo "$path"
+    python3 "$path"
+  done
+done
