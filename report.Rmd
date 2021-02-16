@@ -28,8 +28,8 @@ cat(paste("exactextractr", packageVersion("exactextractr"), "\n"))
 ```{r collapse=TRUE}
 # check it manually
 cat("Python 3.8.5", "\n")
-cat("rasterio 1.1.8", "\n")
-cat("rasterstats 0.14.0")
+cat("rasterio 1.2.0", "\n")
+cat("rasterstats 0.15.0")
 ```
 
 ```{r}
@@ -52,7 +52,6 @@ ggplot(df_agg, aes(x = reorder(package, -median), y = median)) +
   geom_col(width = 0.3) +
   geom_errorbar(aes(ymin = median, ymax = median + sd),
                 color = "red", width = 0.3) +
-  labs(caption = "rasterstats hasn't been tested because is slow (1 hour)") +
   ylab("Time [s]") +
   xlab("Package") +
   coord_flip() +
@@ -86,14 +85,10 @@ df_agg = merge(aggregate(time ~ package, df_agg, median),
                aggregate(time ~ package, df_agg, sd), by = "package")
 colnames(df_agg)[2:3] = c("median", "sd")
 
-# results from stars are not comparable with other packages
-df_agg = df_agg[df_agg$median != 0, ]
-
 ggplot(df_agg, aes(x = reorder(package, -median), y = median)) + 
-  geom_col(width = 0.3) +
+  geom_col(width = 0.4) +
   geom_errorbar(aes(ymin = median, ymax = median + sd),
-                color = "red", width = 0.3) +
-  labs(caption = "stars had memory allocation error") +
+                color = "red", width = 0.4) +
   ylab("Time [s]") +
   xlab("Package") +
   coord_flip() +
@@ -113,7 +108,6 @@ ggplot(df_agg, aes(x = reorder(package, -median), y = median)) +
   geom_col(width = 0.3) +
   geom_errorbar(aes(ymin = median, ymax = median + sd),
                 color = "red", width = 0.3) +
-  labs(caption = "stars default chunk size was lowered from (7771, 3217) to (7771, 1608)") +
   ylab("Time [s]") +
   xlab("Package") +
   coord_flip() +
@@ -152,7 +146,6 @@ ggplot(df_agg, aes(x = reorder(package, -median), y = median)) +
   geom_col(width = 0.3) +
   geom_errorbar(aes(ymin = median, ymax = median + sd),
                 color = "red", width = 0.3) +
-  labs(caption = "raster hasn't been tested because is VERY slow (few hours)") +
   ylab("Time [s]") +
   xlab("Package") +
   coord_flip() +
@@ -162,10 +155,6 @@ ggplot(df_agg, aes(x = reorder(package, -median), y = median)) +
 ```{r}
 timings = aggregate(time ~ task + package, df, median)
 colnames(timings)[3] = "median"
-
-# results from stars are not comparable with other packages
-timings = timings[timings$median != 0, ]
-
 timings$median = round(timings$median, 1)
 write.csv(timings, "timings.csv", row.names = FALSE, quote = FALSE)
 ```
