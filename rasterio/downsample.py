@@ -54,5 +54,5 @@ os.remove(stack_file)
 df = {'task': ['downsample'] * 10, 'package': ['rasterio'] * 10, 'time': t_list}
 df = pd.DataFrame.from_dict(df)
 if not os.path.isdir('results'): os.mkdir('results')
-savepath = os.path.join('results', 'zonal-rasterstats.csv')
+savepath = os.path.join('results', 'downsample-rasterio.csv')
 df.to_csv(savepath, index = False, decimal = ',', sep = ';')
