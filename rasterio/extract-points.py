@@ -7,12 +7,13 @@ import pandas as pd
 
 
 wd = os.getcwd()
-catalog = 'data\\LC08_L1TP_190024_20200418_20200822_02_T1'
+catalog = os.path.join('data', 'LC08_L1TP_190024_20200418_20200822_02_T1')
 rasters = os.listdir(catalog)
 rasters = [r for r in rasters if r.endswith(('.TIF'))]
 rasters = [os.path.join(wd, catalog, r) for r in rasters]
 
-with fiona.open("data\\vector\\points.gpkg", "r") as gpkg:
+pts_path = os.path.join('data', 'vector', 'points.gpkg')
+with fiona.open(pts_path, "r") as gpkg:
     points = [feature["geometry"] for feature in gpkg]
 
 coords = [point['coordinates'] for point in points]
@@ -57,5 +58,5 @@ df = {'task': ['extract-points'] * 10, 'package': ['rasterio'] * 10,
       'time': t_list}
 df = pd.DataFrame.from_dict(df)
 if not os.path.isdir('results'): os.mkdir('results')
-df.to_csv('results\\extract-points-rasterio.csv', index = False, decimal = ',',
-          sep = ';')
+savepath = os.path.join('results', 'zonal-rasterstats.csv')
+df.to_csv(savepath, index = False, decimal = ',', sep = ';')

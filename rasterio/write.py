@@ -6,7 +6,7 @@ import pandas as pd
 
 
 wd = os.getcwd()
-catalog = 'data\\LC08_L1TP_190024_20200418_20200822_02_T1'
+catalog = os.path.join('data', 'LC08_L1TP_190024_20200418_20200822_02_T1')
 rasters = os.listdir(catalog)
 rasters = [r for r in rasters if r.endswith(('.TIF'))]
 rasters = [os.path.join(wd, catalog, r) for r in rasters]
@@ -39,4 +39,5 @@ os.remove(stack_file)
 df = {'task': ['write'] * 10, 'package': ['rasterio'] * 10, 'time': t_list}
 df = pd.DataFrame.from_dict(df)
 if not os.path.isdir('results'): os.mkdir('results')
-df.to_csv('results\\write-rasterio.csv', index = False, decimal = ',', sep = ';')
+savepath = os.path.join('results', 'zonal-rasterstats.csv')
+df.to_csv(savepath, index = False, decimal = ',', sep = ';')
