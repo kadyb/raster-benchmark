@@ -18,16 +18,14 @@ The results are available at https://kadyb.github.io/raster-benchmark/report.htm
 1. Download raster data (851 MB) from [Google Drive](https://drive.google.com/uc?id=1lzglfQJqlQh9OWT_-czc5L0hQ1AhoR8M&export=download) or [Earth Explorer](https://earthexplorer.usgs.gov/) (original source, registration required) and then unzip to `data/`. 
 
 ### Dataset
-Landsat 8 satellite scene (10 bands with a resolution of 30 m) was used for tests.
+Landsat 8 satellite scene (10 bands, 30 m resolution, 7771 x 7871 pixels) was used for tests.
 
 Scene ID: *LC08_L1TP_190024_20200418_20200822_02_T1*
 
 ### Hardware configuration
-CPU: Intel Xeon CPU E5-2620 v2 @ 2.10GHz
-
-RAM: 64 GB
-
-OS: Pop!_OS 20.04 LTS
+- CPU: Intel Xeon CPU E5-2620 v2 @ 2.10GHz
+- RAM: 64 GB
+- OS: Pop!_OS 20.04 LTS
 
 ### Acknowledgment
 Landsat-8 image courtesy of the U.S. Geological Survey, https://earthexplorer.usgs.gov/
