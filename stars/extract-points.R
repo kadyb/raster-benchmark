@@ -1,5 +1,4 @@
 library(sf)
-library(dplyr)
 library(stars)
 
 points = read_sf("data/vector/points.gpkg")
