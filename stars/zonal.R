@@ -3,7 +3,6 @@
 if (FALSE) {
 
   library(sf)
-  library(dplyr)
   library(stars)
 
   buffers = read_sf("data/vector/buffers.gpkg")
@@ -19,7 +18,7 @@ if (FALSE) {
   t_vec = numeric(10)
   for (i in seq_len(10)) {
 
-    t = system.time(pull(aggregate(ras, buffers, FUN = mean)))
+    t = system.time(st_drop_geometry(st_as_sf(aggregate(ras, buffers, FUN = mean))))
     t = unname(t["elapsed"])
     t_vec[i] = t
 

@@ -15,7 +15,7 @@ ras = st_set_dimensions(ras, 3, values = ras_names, names = "band")
 t_vec = numeric(10)
 for (i in seq_len(10)) {
 
-  t = system.time(pull(st_extract(ras, points)))
+  t = system.time(st_drop_geometry(st_as_sf(st_extract(ras, points))))
   t = unname(t["elapsed"])
   t_vec[i] = t
 
