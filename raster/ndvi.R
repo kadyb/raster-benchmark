@@ -8,22 +8,18 @@ ras = stack(rasters)
 ras_names = c("B1", "B10", "B11", "B2", "B3", "B4", "B5", "B6", "B7", "B9")
 names(ras) = ras_names
 
+### define NDVI formula
+ndvi = function(red, nir) {
+  (nir - red) / (nir + red)
+}
+
 ###############################################
 ### calc NDVI using function
-
-calc_ndvi = function(img, nir, red) {
-
-  nir = img[[nir]]
-  red = img[[red]]
-  ndvi = (nir - red) / (nir + red)
-  return(ndvi)
-
-}
 
 t_vec_1 = numeric(10)
 for (i in seq_len(10)) {
 
-  t = system.time(calc_ndvi(ras, "B5", "B4"))
+  t = system.time(ndvi(ras[["B4"]], ras[["B5"]]))
   t = unname(t["elapsed"])
   t_vec_1[i] = t
 
@@ -32,12 +28,10 @@ for (i in seq_len(10)) {
 ###############################################
 ### calc NDVI using overlay
 
-calc_ndvi = function(nir, red) (nir - red) / (nir + red)
-
 t_vec_2 = numeric(10)
 for (i in seq_len(10)) {
 
-  t = system.time(overlay(ras[["B5"]], ras[["B4"]], fun = calc_ndvi))
+  t = system.time(overlay(ras[["B4"]], ras[["B5"]], fun = ndvi))
   t = unname(t["elapsed"])
   t_vec_2[i] = t
 

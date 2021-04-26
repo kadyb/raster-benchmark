@@ -9,13 +9,18 @@ ras = st_redimension(ras)
 ras_names = c("B1", "B10", "B11", "B2", "B3", "B4", "B5", "B6", "B7", "B9")
 ras = st_set_dimensions(ras, 3, values = ras_names, names = "band")
 
+### define NDVI formula
+ndvi = function(red, nir) {
+  (nir - red) / (nir + red)
+}
+
 ###############################################
 ### calc NDVI using function
 
 t_vec_1 = numeric(10)
 for (i in seq_len(10)) {
 
-  t = system.time(adrop((ras[,,,7] - ras[,,,6]) / (ras[,,,7] + ras[,,,6])))
+  t = system.time(adrop(ndvi(ras[,,,6], ras[,,,7])))
   t = unname(t["elapsed"])
   t_vec_1[i] = t
 
@@ -24,12 +29,10 @@ for (i in seq_len(10)) {
 ###############################################
 ### calc NDVI using st_apply
 
-calc_ndvi = function(red, nir) (nir - red) / (nir + red)
-
 t_vec_2 = numeric(10)
 for (i in seq_len(10)) {
 
-  t = system.time(st_apply(ras[,,,6:7], c("x", "y"), calc_ndvi))
+  t = system.time(st_apply(ras[,,,6:7], c("x", "y"), ndvi))
   t = unname(t["elapsed"])
   t_vec_2[i] = t
 
