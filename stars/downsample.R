@@ -8,8 +8,9 @@ ras = read_stars(rasters, along = 3, proxy = FALSE)
 ras_names = c("B1", "B10", "B11", "B2", "B3", "B4", "B5", "B6", "B7", "B9")
 ras = st_set_dimensions(ras, 3, values = ras_names, names = "band")
 
+# prepare raster with target geometry
 dest = st_as_stars(st_bbox(ras), dx = 90, values = 0L)
-dest = c(dest, dest, dest, dest, dest, dest, dest, dest, dest, dest)
+dest = do.call(c, lapply(seq_len(dim(ras)[3]), function(x) dest))
 dest = merge(dest)
 
 t_vec = numeric(10)
