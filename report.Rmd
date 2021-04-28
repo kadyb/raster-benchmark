@@ -22,6 +22,7 @@ cat(paste("sf", packageVersion("sf"), "\n"))
 cat(paste("stars", packageVersion("stars"), "\n"))
 cat(paste("terra", packageVersion("terra"), "\n"))
 cat(paste("raster", packageVersion("raster"), "\n"))
+cat(paste("raster", packageVersion("data.table"), "\n"))
 cat(paste("exactextractr", packageVersion("exactextractr"), "\n"))
 ```
 

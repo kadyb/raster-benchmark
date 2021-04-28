@@ -13,6 +13,7 @@ The results are available at https://kadyb.github.io/raster-benchmark/report.htm
 - [stars](https://github.com/r-spatial/stars)
 - [terra](https://github.com/rspatial/terra)
 - [raster](https://github.com/rspatial/raster)
+- [data.table](https://github.com/Rdatatable/data.table)
 - [exactextractr](https://github.com/isciences/exactextractr)
 
 ## Reproduction
