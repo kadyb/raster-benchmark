@@ -8,6 +8,7 @@ The results are available at https://kadyb.github.io/raster-benchmark/report.htm
 **Python**:
 - [rasterio](https://github.com/mapbox/rasterio)
 - [rasterstats](https://github.com/perrygeo/python-rasterstats)
+- [rioxarray](https://github.com/corteva/rioxarray)
 
 **R**:
 - [stars](https://github.com/r-spatial/stars)

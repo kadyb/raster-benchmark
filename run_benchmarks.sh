@@ -1,7 +1,7 @@
 #!/bin/bash
 
 R_packages=(data.table exactextractr raster stars terra)
-Python_packages=(rasterio rasterstats)
+Python_packages=(rasterio rasterstats rioxarray)
 
 mkdir results
 
