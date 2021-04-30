@@ -154,10 +154,37 @@ ggplot(df_agg, aes(x = reorder(package, -median), y = median)) +
   theme_light()
 ```
 
+```{r final-plot, eval=FALSE}
+df_agg = aggregate(time ~ task + package, df, median)
+python = c("rasterio", "rasterstats", "rioxarray")
+df_agg$lang = ifelse(df_agg$package %in% python, "Python", "R")
+df_agg$lang = as.factor(df_agg$lang)
+
+# drop slower funs from same packages 
+pkg_drop = c("raster-fun", "stars-st_apply", "terra-fun")
+df_agg = df_agg[!df_agg$package %in% pkg_drop, ]
+
+pkg_name = strsplit(as.character(df_agg$package), "-")
+df_agg$package = sapply(pkg_name, "[[", 1)
+
+xlabels = c("Crop", "Downsample", "Extract", "NDVI", "Write", "Zonal")
+ggplot(df_agg, aes(x = task, y = time)) +
+  geom_point(aes(shape = lang, color = package), size = 2, alpha = 0.8,
+             position = position_jitter(width = 0.2, seed = 1)) +
+  labs(title = "Benchmark raster operations", color = "Package",
+       shape = "Language") +
+  scale_x_discrete(labels = xlabels) +
+  scale_color_brewer(palette = "Set1") +
+  ylab("Time [s]") +
+  xlab("Task") +
+  theme_light() +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
 ```{r}
 timings = aggregate(time ~ task + package, df, median)
 colnames(timings)[3] = "median"
-timings$median = round(timings$median, 1)
+timings$median = round(timings$median, 2)
 write.csv(timings, "timings.csv", row.names = FALSE, quote = FALSE)
 ```
 
