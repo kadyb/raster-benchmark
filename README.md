@@ -2,6 +2,8 @@
 This repository contains a collection of raster processing benchmarks for Python and R packages.
 The tests cover the most common operations such as extracting values by points, downsampling, calculating NDVI, writing multilayer, cropping by extent and calculating zonal statistics.
 
+<img src="comparison.png" width="100%"/>
+
 The results are available at https://kadyb.github.io/raster-benchmark/report.html.
 
 ## Software
