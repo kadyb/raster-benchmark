@@ -4,6 +4,7 @@ rasters = list.files("data/LC08_L1TP_190024_20200418_20200822_02_T1/",
                      pattern = "\\.TIF$", full.names = TRUE)
 
 ras = stack(rasters)
+ras = readAll(ras)
 
 ras_names = c("B1", "B10", "B11", "B2", "B3", "B4", "B5", "B6", "B7", "B9")
 names(ras) = ras_names
