@@ -171,14 +171,16 @@ xlabels = c("Crop", "Downsample", "Extract", "NDVI", "Write", "Zonal")
 ggplot(df_agg, aes(x = task, y = time)) +
   geom_point(aes(shape = lang, color = package), size = 2, alpha = 0.8,
              position = position_jitter(width = 0.2, seed = 1)) +
-  labs(title = "Benchmark raster operations", color = "Package",
-       shape = "Language") +
+  labs(title = "Benchmark raster operations",
+       caption = "https://github.com/kadyb/raster-benchmark",
+       color = "Package", shape = "Language") +
   scale_x_discrete(labels = xlabels) +
   scale_color_brewer(palette = "Set1") +
   ylab("Time [s]") +
   xlab("Task") +
   theme_light() +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.caption.position = "plot")
 ```
 
 ```{r}
