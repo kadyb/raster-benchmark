@@ -15,10 +15,13 @@ ndvi = function(red, nir) {
 ###############################################
 ### calc NDVI using function
 
+red = adrop(ras[,,,6])
+nir = adrop(ras[,,,7])
+
 t_vec_1 = numeric(10)
 for (i in seq_len(10)) {
 
-  t = system.time(adrop(ndvi(ras[,,,6], ras[,,,7])))
+  t = system.time(ndvi(red, nir))
   t = unname(t["elapsed"])
   t_vec_1[i] = t
 

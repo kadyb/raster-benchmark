@@ -17,10 +17,13 @@ ndvi = function(red, nir) {
 ###############################################
 ### calc NDVI using function
 
+red = ras[["B4"]]
+nir = ras[["B5"]]
+
 t_vec_1 = numeric(10)
 for (i in seq_len(10)) {
 
-  t = system.time(ndvi(ras[["B4"]], ras[["B5"]]))
+  t = system.time(ndvi(red, nir))
   t = unname(t["elapsed"])
   t_vec_1[i] = t
 
