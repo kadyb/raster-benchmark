@@ -25,7 +25,7 @@ stack_file = 'stack.TIF'
 for i in range(10):
     tic = timeit.default_timer()
 
-    with rasterio.open(stack_file, 'w', **meta) as dst:
+    with rasterio.open(stack_file, 'w', **meta, compress = 'LZW') as dst:
         for id, layer in enumerate(rasters, start = 1):
             with rasterio.open(layer) as stack:
                 dst.write_band(id, stack.read(1))
