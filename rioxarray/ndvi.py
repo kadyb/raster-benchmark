@@ -13,7 +13,9 @@ rasters = [r for r in rasters if r.endswith(('.TIF'))]
 rasters = [os.path.join(wd, catalog, r) for r in rasters]
 
 red = rioxarray.open_rasterio(rasters[5], masked = True)
+red = red.squeeze()
 nir = rioxarray.open_rasterio(rasters[6], masked = True)
+nir = nir.squeeze()
 
 ### NDVI
 
