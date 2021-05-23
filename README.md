@@ -1,6 +1,6 @@
 # Raster processing benchmarks
 This repository contains a collection of raster processing benchmarks for Python and R packages.
-The tests cover the most common operations such as extracting values by points, downsampling, calculating NDVI, writing multilayer, cropping by extent and calculating zonal statistics.
+The tests cover the most common operations such as loading data, extracting values by points, downsampling, calculating NDVI, writing multilayer, cropping by extent and calculating zonal statistics.
 The comparison is made from the user's perspective (the simplest functions are used and the code is not optimized), so the results do not represent the best performance.
 
 <img src="comparison.png" width="100%"/>
