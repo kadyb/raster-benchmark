@@ -17,8 +17,7 @@ if (FALSE) {
   for (i in seq_len(10)) {
 
     t = system.time(st_drop_geometry(st_as_sf(aggregate(ras, buffers, FUN = mean))))
-    t = unname(t["elapsed"])
-    t_vec[i] = t
+    t_vec[i] = t[["elapsed"]]
 
   }
 

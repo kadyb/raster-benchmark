@@ -15,8 +15,7 @@ for (i in seq_len(10)) {
   # input rasters are 'UInt16'
   t = system.time(write_stars(ras, tmp, options = "COMPRESS=LZW", type = "UInt16",
                               NA_value = 0))
-  t = unname(t["elapsed"])
-  t_vec[i] = t
+  t_vec[i] = t[["elapsed"]]
 
   unlink(tmp)
 

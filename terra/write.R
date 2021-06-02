@@ -18,8 +18,7 @@ for (i in seq_len(10)) {
   tmp = tempfile(fileext = ".tif")
 
   t = system.time(writeRaster(ras, tmp, wopt = param))
-  t = unname(t["elapsed"])
-  t_vec[i] = t
+  t_vec[i] = t[["elapsed"]]
 
   unlink(tmp)
 
