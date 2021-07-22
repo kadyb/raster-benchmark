@@ -22,16 +22,15 @@ cat(paste("sf", packageVersion("sf"), "\n"))
 cat(paste("stars", packageVersion("stars"), "\n"))
 cat(paste("terra", packageVersion("terra"), "\n"))
 cat(paste("raster", packageVersion("raster"), "\n"))
-cat(paste("raster", packageVersion("data.table"), "\n"))
 cat(paste("exactextractr", packageVersion("exactextractr"), "\n"))
 ```
 
 ```{r collapse=TRUE}
 # check it manually
 cat("Python 3.8.5", "\n")
-cat("rasterio 1.2.2", "\n")
+cat("rasterio 1.2.6", "\n")
 cat("rasterstats 0.15.0", "\n")
-cat("rioxarray 0.3.1")
+cat("rioxarray 0.5.0")
 ```
 
 ```{r}
