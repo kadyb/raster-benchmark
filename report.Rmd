@@ -188,6 +188,8 @@ xlabels = c("Crop", "Downsample", "Extract", "Load", "NDVI", "Write", "Zonal")
 ggplot(df_agg, aes(x = task, y = time)) +
   geom_point(aes(shape = lang, color = package), size = 2, alpha = 0.8,
              position = position_jitter(width = 0.2, seed = 1)) +
+  # override circles with squares in legend
+  guides(colour = guide_legend(override.aes = list(shape = 15))) +
   labs(title = "Benchmark raster operations",
        caption = "https://github.com/kadyb/raster-benchmark",
        color = "Package", shape = "Language") +
