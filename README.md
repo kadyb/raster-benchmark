@@ -9,7 +9,7 @@ The detailed results are available at https://kadyb.github.io/raster-benchmark/r
 
 ## Software
 **Python**:
-- [rasterio](https://github.com/mapbox/rasterio)
+- [rasterio](https://github.com/rasterio/rasterio)
 - [rasterstats](https://github.com/perrygeo/python-rasterstats)
 - [rioxarray](https://github.com/corteva/rioxarray)
 
