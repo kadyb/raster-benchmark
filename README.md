@@ -5,7 +5,9 @@ The comparison is made from the user's perspective (the simplest functions are u
 
 <img src="comparison.png" width="100%"/>
 
-The detailed results are available at https://kadyb.github.io/raster-benchmark/report.html. 
+The detailed results are available at https://kadyb.github.io/raster-benchmark/report.html.
+
+You may also be interested in the [vector processing benchmarks](https://github.com/kadyb/vector-benchmark).
 
 ## Software
 **Python**:
