@@ -29,8 +29,8 @@ cat(paste("exactextractr", packageVersion("exactextractr"), "\n"))
 # check it manually
 cat("Python 3.8.10", "\n")
 cat("rasterio 1.2.10", "\n")
-cat("rasterstats 0.15.0", "\n")
-cat("rioxarray 0.10.2")
+cat("rasterstats 0.16.0", "\n")
+cat("rioxarray 0.11.0")
 ```
 
 ```{r}
