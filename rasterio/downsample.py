@@ -38,7 +38,8 @@ for i in range(10):
 
     data = ras.read(
         out_shape = (ras.count, int(ras.height / 3), int(ras.width / 3)),
-        resampling = Resampling.average)
+        resampling = Resampling.average,
+        masked = True)
     
     transform = ras.transform * ras.transform.scale(
         (ras.width / data.shape[-1]),
