@@ -18,6 +18,7 @@ with fiona.open(pts_path, "r") as gpkg:
     points = [feature["geometry"] for feature in gpkg]
     
 coords = [point['coordinates'] for point in points]
+points_df = pd.DataFrame(coords, columns=['x', 'y'])
 
 ### raster stack
 band_names = ["B1", "B10", "B11", "B2", "B3", "B4", "B5", "B6", "B7", "B9"]
@@ -35,11 +36,8 @@ t_list = [None] * 10
 for i in range(10):
     tic = timeit.default_timer()
     
-    data = []
-    for (x, y) in coords:
-        vals = ras.sel(x = x, y = y, method = "nearest").values
-        data.append(vals.tolist())
-    data = pd.DataFrame(data, columns = band_names)
+    vals = ras.sel(x = points_df.x.to_xarray(), y = points_df.y.to_xarray(), method = "nearest")
+    data = vals.to_pandas().transpose()
     
     toc = timeit.default_timer()
     t_list[i] = round(toc - tic, 2)
