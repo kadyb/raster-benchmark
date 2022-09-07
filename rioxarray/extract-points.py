@@ -36,7 +36,9 @@ t_list = [None] * 10
 for i in range(10):
     tic = timeit.default_timer()
     
-    vals = ras.sel(x = points_df.x.to_xarray(), y = points_df.y.to_xarray(), method = "nearest")
+    # vectorization is much faster than loop in rioxarray
+    vals = ras.sel(x = points_df.x.to_xarray(), y = points_df.y.to_xarray(),
+                   method = "nearest")
     data = vals.to_pandas().transpose()
     
     toc = timeit.default_timer()
