@@ -12,4 +12,13 @@ rasters = Rasters.Raster.(raster_files; lazy = true)
 
 # do something
 
+red = read(rasters[5])
+nir = read(rasters[6])
+
+function get_ndvi(red, nir)
+    return @. (nir - red) / (nir + red)
+end
+
+benchmark = @be get_ndvi($red, $nir) seconds=15 gc=false
+
 write_benchmark_as_csv(benchmark; task = "ndvi")

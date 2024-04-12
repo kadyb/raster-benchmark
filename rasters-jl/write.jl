@@ -15,7 +15,7 @@ band_names = ["B1", "B10", "B11", "B2", "B3", "B4", "B5", "B6", "B7", "B9"]
 stack_file = joinpath(data_dir, "stack.nc")
 
 # Stack the rasters
-stack = Rasters.RasterStack(rasters...; name =  band_names)
-benchmark = @be write(stack_file, stack) seconds=60
+rstack = Rasters.RasterStack(rasters...; name = band_names)
+benchmark = @be write(stack_file, rstack) seconds=60
 
 write_benchmark_as_csv(benchmark; task = "write")
