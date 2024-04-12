@@ -2,6 +2,7 @@
 
 R_packages=(exactextractr raster stars terra)
 Python_packages=(rasterio rasterstats rioxarray)
+Julia_packages=(rasters-jl)
 
 mkdir results
 
@@ -22,5 +23,16 @@ do
   do
     echo "$path"
     python3 "$path"
+  done
+done
+
+
+# run Julia benchmarks
+for i in ${Julia_packages[*]}
+do
+  for path in "${i}"/*.jl
+  do
+    echo "$path"
+    julia --project=${i} "$path"
   done
 done
