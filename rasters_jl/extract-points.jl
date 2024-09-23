@@ -16,12 +16,6 @@ band_names = ["B1", "B10", "B11", "B2", "B3", "B4", "B5", "B6", "B7", "B9"]
 
 rstack = Rasters.RasterStack(rasters...; name = band_names)
 
-# TODO: do something, this performance is atrocious
-
-function _get_point_from_raster(raster, point)
-    return raster[X(Near(GI.x(point))), Y(Near(GI.y(point)))]
-end
-
-benchmark = @be _get_point_from_raster.((rstack,), points_df.geom) seconds=60
+benchmark = @be Rasters.extract($rstack, $points_df) seconds=60
 
 write_benchmark_as_csv(benchmark; task = "extract-points")
