@@ -1,12 +1,13 @@
 [project]
+name = "raster-benchmark"
 authors = ["Anshul Singhvi <asinghvi17@simons-rock.edu>"]
 channels = ["conda-forge"]
-description = "Add a short description here"
-name = "raster-benchmark"
+description = "Benchmarking raster processing libraries"
 platforms = ["osx-64"]
 version = "0.1.0"
 
 [tasks]
+# you can run benchmarks by running `pixi run benchmarks` in the terminal
 benchmarks = { cmd = "run_benchmarks.sh", description = "Run benchmarks across languages" }
 
 [dependencies]
@@ -23,7 +24,6 @@ rasterstats = ">=0.19.0,<0.20"
 fiona = ">=1.9.4,<2"
 pandas = ">=2.2.3,<3"
 geopandas = ">=0.14.4,<0.15"
-pygeos = ">=0.14,<0.15"
 julia = ">=1.9.3,<2"
 r-tibble = ">=3.2.1,<4"
 r-sf = ">=1.0_15,<2" # stars needs sf >= 1.0_15
