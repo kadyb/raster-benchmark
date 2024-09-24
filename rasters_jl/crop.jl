@@ -18,7 +18,14 @@ rstack = Rasters.RasterStack(rasters...; name = band_names)
 # Downsample from 30m to 90m (1/3 of the original resolution)
 
 xmin, ymin, xmax, ymax = (598500, 5682100, 727500, 5781000)
+ext = Rasters.Extents.Extent(X = (xmin, ymin), Y = (xmax, ymax))
 
+# You could do it like this:
 benchmark = @be $(rstack)[X(xmin..xmax), Y(ymin..ymax)] seconds=15
+
+# or index directly via Extent
+# benchmark = @be $(rstack)[ext] seconds=15
+# It looks like indexing by extent materializes the raster, so this is 2x slower than the first method 
+# Why?
 
 write_benchmark_as_csv(benchmark; task = "crop")

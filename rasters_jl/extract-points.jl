@@ -1,6 +1,6 @@
 using Rasters, ArchGDAL, NCDatasets, GeoDataFrames
 import GeoInterface as GI, GeometryOps as GO
-using Chairmarks, CairoMakie
+using Chairmarks
 
 include("utils.jl")
 

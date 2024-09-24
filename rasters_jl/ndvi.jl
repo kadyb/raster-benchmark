@@ -19,6 +19,6 @@ function get_ndvi(red, nir)
     return @. (nir - red) / (nir + red)
 end
 
-benchmark = @be get_ndvi($red, $nir) seconds=15 gc=false
+benchmark = @be get_ndvi($red, $nir) seconds=15 gc=true
 
 write_benchmark_as_csv(benchmark; task = "ndvi")

@@ -1,4 +1,5 @@
 using Rasters, ArchGDAL, NCDatasets, GeoDataFrames
+using Chairmarks
 
 include("utils.jl")
 
@@ -16,6 +17,6 @@ stack_file = joinpath(data_dir, "stack.nc")
 
 # Stack the rasters
 rstack = Rasters.RasterStack(rasters...; name = band_names)
-benchmark = @be write($stack_file, $rstack) seconds=60
+benchmark = @be write($stack_file, $rstack; force = true) seconds=60
 
 write_benchmark_as_csv(benchmark; task = "write")
