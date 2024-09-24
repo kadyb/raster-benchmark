@@ -2,7 +2,7 @@
 
 R_packages=(exactextractr raster stars terra)
 Python_packages=(rasterio rasterstats rioxarray)
-Julia_packages=(rasters-jl)
+Julia_packages=(rasters_jl)
 
 mkdir results
 
