@@ -11,6 +11,7 @@ raster_files = filter(endswith(".TIF"), readdir(raster_dir; join=true))
 band_names = (:B1, :B10, :B11, :B2, :B3, :B4, :B5, :B6, :B7, :B9)
 
 # Stack the rasters
+Rasters.checkmem!(false)
 rstack = RasterStack(raster_files; name=band_names)
 stack_file = joinpath(data_dir, "stack.nc")
 benchmark = @be write($stack_file, $rstack; force=true) seconds=60

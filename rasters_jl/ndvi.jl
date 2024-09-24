@@ -14,6 +14,8 @@ rasters = Raster.(raster_files; lazy=true)
 # do something
 get_ndvi(red, nir) = (nir .- red) ./ (nir .+ red)
 
+Rasters.checkmem!(false)
+
 red = read(rasters[5])
 nir = read(rasters[6])
 

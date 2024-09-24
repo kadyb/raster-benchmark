@@ -1,4 +1,5 @@
 using Rasters, ArchGDAL, GeoDataFrames
+import GeometryOps as GO
 using Statistics
 using Chairmarks
 
@@ -15,6 +16,7 @@ band_names = (:B1, :B10, :B11, :B2, :B3, :B4, :B5, :B6, :B7, :B9)
 stack_file = joinpath(data_dir, "stack.nc")
 
 # Stack the rasters
+Rasters.checkmem!(false) # Just in case, there's a bug here.  Doesn't change performance.
 rstack = RasterStack(raster_files; name=band_names)
 benchmark = @be zonal($(Statistics.mean), $rstack; of=$(buffer_df.geom), progress=false) seconds=30 evals=5
 zonal(Statistics.mean, rstack; of=buffer_df.geom, progress=false)
