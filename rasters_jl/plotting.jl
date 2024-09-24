@@ -1,8 +1,8 @@
-using CairoMakie, DelimitedFiles, Statistics
-
 if ENV["BENCHMARKING"] == "true"
     exit(0)
 end
+
+using CairoMakie, DelimitedFiles, Statistics
 
 results_path = joinpath(dirname(@__DIR__), "results")
 results_files = readdir(results_path; join = false)
