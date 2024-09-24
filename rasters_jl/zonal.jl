@@ -16,6 +16,7 @@ band_names = (:B1, :B10, :B11, :B2, :B3, :B4, :B5, :B6, :B7, :B9)
 
 # Stack the rasters
 Rasters.checkmem!(false) # Just in case, there's a bug here on some machines. Doesn't change performance.
+# We need to keep this as a stack not a raster to have separate results for layer
 rstack = RasterStack(raster_files; name=band_names)
 benchmark = @be zonal($(Statistics.mean), $rstack; of=$(buffer_df.geom), progress=false) seconds=30 evals=5
 

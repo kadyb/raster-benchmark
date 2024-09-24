@@ -16,6 +16,7 @@ get_ndvi(red, nir) = (nir .- red) ./ (nir .+ red)
 
 Rasters.checkmem!(false)
 
+# read moves the data to memory - or the function will be lazy and instant!
 red = read(rasters[5])
 nir = read(rasters[6])
 
