@@ -1,12 +1,5 @@
-# R files
 .Rproj.user
 .Rhistory
 .Rdata
-# pixi environments
-.pixi
-*.egg-info
-# Julia environment
-rasters_jl/Manifest.toml
-# data
-data/LC08_L1TP_190024_20200418_20200822_02_T1/*
+data/LC08_L1TP_190024_20200418_20200822_02_T1
 data/stack.nc
