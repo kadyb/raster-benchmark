@@ -101,7 +101,7 @@ result_pkgs  = getindex.(results, 2) .|> string
 result_times = Statistics.median.(getindex.(results, 3))
 # engage in strategic modification of values so that you can actually see results
 # and not just Rasters.jl slapping everything
-result_times[map((task, package) -> task == "crop" && package == "rasters_jl", result_tasks, result_pkgs)] = result_times[map((task, package) -> task == "load" && package == "rasters_jl", result_tasks, result_pkgs)]
+result_times[findfirst(map((task, package) -> task == "crop" && package == "rasters_jl", result_tasks, result_pkgs))] = minimum(result_times)
 
 using SwarmMakie # for beeswarm plots and dodging
 
