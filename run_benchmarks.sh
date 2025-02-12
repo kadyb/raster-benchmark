@@ -12,7 +12,7 @@ do
   for path in "${i}"/*
   do
     echo "$path"
-    Rscript "$path"
+    pixi run --environment="r-$i" Rscript $path
   done
 done
 
@@ -22,7 +22,7 @@ do
   for path in "${i}"/*
   do
     echo "$path"
-    python3 "$path"
+    pixi run --environment="py-$i" python3 $path
   done
 done
 

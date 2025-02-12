@@ -3,7 +3,7 @@ name = "raster-benchmark"
 authors = ["Anshul Singhvi <asinghvi17@simons-rock.edu>"]
 channels = ["conda-forge"]
 description = "Benchmarking raster processing libraries"
-platforms = ["osx-64"]
+platforms = ["osx-64", "linux-64"]
 version = "0.1.0"
 
 [tasks.benchmarks]
@@ -16,7 +16,7 @@ depends-on = ["r-raster.benchmark", "r-stars.benchmark", "r-terra.benchmark", "r
 r-raster = ["r", "r-sf", "r-raster"]
 r-stars = ["r", "r-sf", "r-stars"]
 r-terra = ["r", "r-sf", "r-terra"]
-r-exactextractr = ["r", "r-exactextractr"]
+r-exactextractr = ["r", "r-exactextractr", "r-terra"]
 
 py-rasterio = ["python", "py-rasterio"]
 py-rasterstats = ["python", "py-rasterstats"]
@@ -36,39 +36,39 @@ r-s2 = ">=1.1.4,<2"
 
 [feature.python.dependencies]
 python = ">=3.11.6,<4"
-xarray = ">=2024.9.0,<2025"
+xarray = ">=2024.9.0,<2026"
 fiona = ">=1.9.4,<2"
 pandas = ">=2.2.3,<3"
-geopandas = ">=0.14.4,<0.15"
+geopandas = ">=1,<2"
 
 [feature.r-raster]
 dependencies = {r-raster = ">=3.6_26,<4"}
-tasks = {benchmark = "cd raster; for path in \"${i}\"/*; do; echo \"$path\"; Rscript \"$path\"; done"}
+# tasks = {benchmark = "cd raster; for path in \"${i}\"/*; do; echo \"$path\"; Rscript \"$path\"; done"}
 
 [feature.r-stars]
 dependencies = {r-stars = ">=0.6_6,<0.7", r-sf = ">=1.0_15,<2", r-s2 = ">=1.1.4,<2"}
-tasks = {benchmark = "cd stars; for path in \"${i}\"/*; do; echo \"$path\"; Rscript \"$path\"; done"}
+# tasks = {benchmark = "cd stars; for path in \"${i}\"/*; do; echo \"$path\"; Rscript \"$path\"; done"}
 
 [feature.r-terra]
-dependencies = {r-terra = ">=1.7_39,<2"}
-tasks = {benchmark = "cd terra; for path in \"${i}\"/*; do; echo \"$path\"; Rscript \"$path\"; done"}
+dependencies = {r-terra = ">=1.8.5,<2"}
+# tasks = {benchmark = "cd terra; for path in \"${i}\"/*; do; echo \"$path\"; Rscript \"$path\"; done"}
 
 [feature.r-exactextractr]
-dependencies = {r-exactextractr = ">=0.9.1,<0.10"}
-tasks = {benchmark = "cd exactextractr; for path in \"${i}\"/*; do; echo \"$path\"; Rscript \"$path\"; done"}
+dependencies = {r-exactextractr = ">=0.10,<0.11"}
+# tasks = {benchmark = "cd exactextractr; for path in \"${i}\"/*; do; echo \"$path\"; Rscript \"$path\"; done"}
 
 [feature.py-rasterio]
 dependencies = {rasterio = ">=1.3.7,<2"}
-tasks = {benchmark = "cd rasterio; for path in \"${i}\"/*; do; echo \"$path\"; python3 \"$path\"; done"}
+# tasks = {benchmark = "cd rasterio; for path in \"${i}\"/*; do; echo \"$path\"; python3 \"$path\"; done"}
 
 [feature.py-rasterstats]
-dependencies = {rasterstats = ">=0.19.0,<0.20"}
-tasks = {benchmark = "cd rasterstats; for path in \"${i}\"/*; do; echo \"$path\"; python3 \"$path\"; done"}
+dependencies = {rasterstats = ">=0.20.0,<0.21"}
+# tasks = {benchmark = "cd rasterstats; for path in \"${i}\"/*; do; echo \"$path\"; python3 \"$path\"; done"}
 
 [feature.py-rioxarray]
-dependencies = {rioxarray = ">=0.17.0,<0.18"}
-tasks = {benchmark = "cd rioxarray; for path in \"${i}\"/*; do; echo \"$path\"; python3 \"$path\"; done"}
+dependencies = {rioxarray = ">=0.18.0,<0.19"}
+# tasks = {benchmark = "cd rioxarray; for path in \"${i}\"/*; do; echo \"$path\"; python3 \"$path\"; done"}
 
 [feature.julia-rastersjl]
 dependencies = {julia = ">=1.9.3,<2"}
-tasks = {benchmark = "cd rasters_jl; for path in \"${i}\"/*; do; echo \"$path\"; BENCHMARKING=true julia \"$path\"; done"}
+# tasks = {benchmark = "cd rasters_jl; for path in \"${i}\"/*; do; echo \"$path\"; BENCHMARKING=true julia \"$path\"; done"}
