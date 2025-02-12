@@ -1,4 +1,4 @@
-if ENV["BENCHMARKING"] == "true"
+if get(ENV, "BENCHMARKING", "false") == "true"
     exit(0)
 end
 
@@ -121,7 +121,7 @@ f, a, p = beeswarm(
         xlabel = "Task",
         ylabel = "Median time (s)",
         yscale = log10,
-        title = "Benchmark vector operations",
+        title = "Benchmark raster operations",
         xgridvisible = false,
         xminorgridvisible = true,
         yminorgridvisible = true,

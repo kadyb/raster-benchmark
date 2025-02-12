@@ -1,4 +1,5 @@
 using Rasters, ArchGDAL, NCDatasets, GeoDataFrames
+using Chairmarks
 
 include("utils.jl")
 
