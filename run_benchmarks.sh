@@ -30,9 +30,13 @@ done
 # run Julia benchmarks
 for i in ${Julia_packages[*]}
 do
+  # install julia packages first,
+  # since pixi doesn't handle those
+  pixi run --environment=julia-rasters julia --threads=auto --project=${i} -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
+  # now the main loop
   for path in "${i}"/*.jl
   do
     echo "$path"
-    julia --project=${i} "$path"
+    pixi run --environment=julia-rasters BENCHMARKING=true julia --threads=auto --project=${i} "$path"
   done
 done

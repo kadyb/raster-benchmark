@@ -22,7 +22,7 @@ py-rasterio = ["python", "py-rasterio"]
 py-rasterstats = ["python", "py-rasterstats"]
 py-rioxarray = ["python", "py-rioxarray"]
 
-julia-rastersjl = ["julia-rastersjl"]
+julia-rasters = ["julia-rasters"]
 
 
 [feature.r.dependencies]
@@ -69,6 +69,6 @@ dependencies = {rasterstats = ">=0.20.0,<0.21"}
 dependencies = {rioxarray = ">=0.18.0,<0.19"}
 # tasks = {benchmark = "cd rioxarray; for path in \"${i}\"/*; do; echo \"$path\"; python3 \"$path\"; done"}
 
-[feature.julia-rastersjl]
+[feature.julia-rasters]
 dependencies = {julia = ">=1.9.3,<2"}
 # tasks = {benchmark = "cd rasters_jl; for path in \"${i}\"/*; do; echo \"$path\"; BENCHMARKING=true julia \"$path\"; done"}

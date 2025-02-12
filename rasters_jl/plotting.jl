@@ -4,6 +4,10 @@ end
 
 using CairoMakie, DelimitedFiles, Statistics
 
+using SwarmMakie, MakieTeX, CategoricalArrays # for beeswarm plots and dodging
+
+using CairoMakie.Makie: RGBA
+
 results_path = joinpath(dirname(@__DIR__), "results")
 results_files = readdir(results_path; join = false)
 regex = r"([\w-]+)-(?!-)(\w+).csv" # first match any word or dash character, then match a dash, then negative lookahead to make sure there are no more dashes, then match the package name and then end with .csv
@@ -26,10 +30,10 @@ f = Figure()
 for (idx, task) in enumerate(unique(first.(results)))
     records = filter(r -> r[1] == task, results)
     colors = fill(Makie.wong_colors()[1], length(records))
-    records_ind = findfirst(==("rasters_jl"), getindex.(records, 2))
+    records_ind = findfirst(==("rasters"), getindex.(records, 2))
     if !isnothing(records_ind)
-        println("Found rasters_jl for $task, coloring it")
-        colors[findfirst(==("rasters_jl"), getindex.(records, 2))] = Makie.wong_colors()[3]
+        println("Found rasters for $task, coloring it")
+        colors[findfirst(==("rasters"), getindex.(records, 2))] = Makie.wong_colors()[3]
     end
     a, p = barplot(f[idx, 1],
         1:length(records), 
@@ -76,7 +80,7 @@ marker_map = Dict(
     "rasterio" => language_marker_dict["python"],
     "rioxarray" => language_marker_dict["python"],
     # Julia package
-    "rasters_jl" => language_marker_dict["julia"],
+    "rasters" => language_marker_dict["julia"],
 )
 # package name to color
 r_colors = Makie.to_colormap(:PuRd_5) |> reverse
@@ -93,7 +97,7 @@ color_map = Dict(
     "rasterstats" => py_colors[2],
     "rioxarray" => py_colors[3],
     # Julia package
-    "rasters_jl" => Makie.Colors.JULIA_LOGO_COLORS.green,
+    "rasters" => Makie.Colors.JULIA_LOGO_COLORS.green,
 )
 
 result_tasks = getindex.(results, 1) .|> string
@@ -101,13 +105,9 @@ result_pkgs  = getindex.(results, 2) .|> string
 result_times = Statistics.median.(getindex.(results, 3))
 # engage in strategic modification of values so that you can actually see results
 # and not just Rasters.jl slapping everything
-result_times[findfirst(map((task, package) -> task == "crop" && package == "rasters_jl", result_tasks, result_pkgs))] = minimum(result_times)
-
-using SwarmMakie # for beeswarm plots and dodging
+result_times[findfirst(map((task, package) -> task == "crop" && package == "rasters", result_tasks, result_pkgs))] = minimum(result_times)
 
 
-using CategoricalArrays
-using Makie: RGBA
 
 ca = CategoricalArray(result_tasks)
 
