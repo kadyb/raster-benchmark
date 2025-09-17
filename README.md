@@ -21,6 +21,9 @@ You may also be interested in the [vector processing benchmarks](https://github.
 - [raster](https://github.com/rspatial/raster)
 - [exactextractr](https://github.com/isciences/exactextractr)
 
+**Juliia**:
+- [Rasters.jl](https://github.com/rafaqz/Rasters.jl)
+
 ## Reproduction
 1. Download raster data (851 MB) from [Google Drive](https://drive.google.com/uc?id=1lzglfQJqlQh9OWT_-czc5L0hQ1AhoR8M&export=download) or [Earth Explorer](https://earthexplorer.usgs.gov/) (original source, registration required) and then unzip to `data/`.
 2. Run all benchmarks using batch script (`run_benchmarks.sh`) or single benchmarks files.
@@ -38,6 +41,10 @@ Rscript stars/crop.R
 
 ```
 python3 rasterio/crop.py
+```
+
+```
+julia rasters_jl/crop.jl
 ```
 
 ## Dataset
