@@ -9,9 +9,8 @@ points_df = GeoDataFrames.read(joinpath(data_dir, "vector", "points.gpkg"))
 
 raster_dir = joinpath(data_dir, "LC08_L1TP_190024_20200418_20200822_02_T1")
 raster_files = filter(endswith(".TIF"), readdir(raster_dir; join=true))
-# TODO: replace_missing will not be needed in the next Rasters version
-red = replace_missing(Raster(raster_files[6]; lazy=false))
-nir = replace_missing(Raster(raster_files[7]; lazy=false))
+red = Raster(raster_files[6]; lazy=false) .* 1.0 # Convert to Float64 for math use without overflow
+nir = Raster(raster_files[7]; lazy=false) .* 1.0
 
 # do something
 get_ndvi(red, nir) = (nir .- red) ./ (nir .+ red)
